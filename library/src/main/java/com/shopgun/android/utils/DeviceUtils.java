@@ -19,8 +19,6 @@ package com.shopgun.android.utils;
 import android.content.Context;
 import android.location.LocationManager;
 
-import com.shopgun.android.utilities.R;
-
 import java.util.List;
 
 public class DeviceUtils {

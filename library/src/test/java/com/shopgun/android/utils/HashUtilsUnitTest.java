@@ -46,10 +46,9 @@ public class HashUtilsUnitTest {
         Assert.assertNotNull(regularString);
         Assert.assertTrue(regularString.matches(MD5_REGEX));
 
-        Assert.assertEquals("4e02b43613429b39c7eebf7d9673c1cc88f1d02862e6586ccb47367b0bf50ad4",
-                HashUtils.md5("test my string").toLowerCase());
-        Assert.assertEquals("aaae559c5335370994be18668877907a3520b6c3964279c6183039a15a39cb2d",
-                HashUtils.md5("test my string\\nwithnewline").toLowerCase());
+        Assert.assertEquals("2897ed14d78abd158165e462370719c0", HashUtils.md5("test my string").toLowerCase());
+        Assert.assertEquals("3bcfa45c6c474a44644b67690ba6209f", HashUtils.md5("test my string\\nwithnewline").toLowerCase());
+
     }
 
     @Test
@@ -63,9 +62,10 @@ public class HashUtilsUnitTest {
         Assert.assertNotNull(regularString);
         Assert.assertTrue(regularString.matches(SHA256_REGEX));
 
-        Assert.assertEquals("2897ed14d78abd158165e462370719c0", HashUtils.sha256("test my string").toLowerCase());
-        Assert.assertEquals("3bcfa45c6c474a44644b67690ba6209f", HashUtils.sha256("test my string\\nwithnewline").toLowerCase());
-
+        Assert.assertEquals("4e02b43613429b39c7eebf7d9673c1cc88f1d02862e6586ccb47367b0bf50ad4",
+                HashUtils.sha256("test my string").toLowerCase());
+        Assert.assertEquals("aaae559c5335370994be18668877907a3520b6c3964279c6183039a15a39cb2d",
+                HashUtils.sha256("test my string\\nwithnewline").toLowerCase());
     }
 
 }
