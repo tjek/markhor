@@ -18,6 +18,6 @@ package com.shopgun.android.utils;
 
 public class Markhor {
 
-    public static final String TAG = Tag.from(TextUtils.class);
+    public static final String TAG = Tag.from(Markhor.class);
 
 }

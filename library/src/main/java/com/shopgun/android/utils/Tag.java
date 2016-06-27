@@ -24,7 +24,7 @@ public class Tag {
         // private constructor
     }
 
-    public static final String TAG_PREFIX = "sgn:markhor:";
+    public static final String TAG_PREFIX = "sgn:utils:";
 
     public static String from(Class<?> clazz) {
         return from(clazz.getSimpleName());
