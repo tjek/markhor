@@ -26,6 +26,10 @@ public class ColorUtils {
 
     public static final String TAG = Tag.from(ColorUtils.class);
 
+    private static final String ARGB_FORMAT = "#%08X";
+    private static final String RGB_FORMAT = "#%06X";
+    private static final String HSV_FORMAT = "hsv[%.2f, %.2f, %.2f]";
+
     /**
      * Returns the complimentary color. (Alpha channel remains intact)
      *
@@ -48,21 +52,42 @@ public class ColorUtils {
         return Color.argb(alpha, red, green, blue);
     }
 
-    private static final String ARGB_FORMAT = "#%08X";
+    /**
+     * Convert a color to an ARGB string.
+     * <p>i.e. {@link Color#BLUE Color.BLUE} returns the string {@code #FF0000FF}.</p>
+     * @param color a color
+     * @return the color as string, or null if {@code color} is {@code null}.
+     */
     public static String toARGBString(@ColorInt int color) {
         return String.format(Locale.US, ARGB_FORMAT, color);
     }
 
-    private static final String RGB_FORMAT = "#%06X";
+    /**
+     * Convert a color to an RGB string.
+     * <p>i.e. {@link Color#BLUE Color.BLUE} returns the string {@code #0000FF}.</p>
+     * @param color a color
+     * @return the color as string, or null if {@code color} is {@code null}.
+     */
     public static String toRGBString(@ColorInt int color) {
         return String.format(Locale.US, RGB_FORMAT, 0xFFFFFF & color);
     }
 
+    /**
+     * Convert a color to an HSV string.
+     * <p>i.e. {@link Color#BLUE Color.BLUE} returns the string {@code hsv[240.00, 1.00, 1.00]}.</p>
+     * @param color a color
+     * @return the color as a HSV string.
+     */
     public static String toHsvString(int color) {
         return toHsvString(toHSV(color));
     }
 
-    private static final String HSV_FORMAT = "hsv[%.2f, %.2f, %.2f]";
+    /**
+     * Convert a HSV {@code float[]} to an HSV string.
+     * <p>i.e. {@link Color#BLUE Color.BLUE} returns the string {@code hsv[240.00, 1.00, 1.00]}.</p>
+     * @param hsv a HSV {@code float[]}
+     * @return the HSV as a HSV string.
+     */
     public static String toHsvString(float[] hsv) {
         return String.format(Locale.US, HSV_FORMAT, hsv[0], hsv[1], hsv[2]);
     }
