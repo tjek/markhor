@@ -95,7 +95,8 @@ public class DateUtils {
      * @param date a date
      * @return the time of day
      */
-    public static long getTimeOfDayWithTimeZone(Date date) {Calendar c = Calendar.getInstance();
+    public static long getTimeOfDayWithTimeZone(Date date) {
+        Calendar c = Calendar.getInstance();
         c.setTime(date);
         int h = c.get(Calendar.HOUR_OF_DAY);
         int m = c.get(Calendar.MINUTE);

@@ -74,9 +74,9 @@ public class ColorUtilsUnitTest {
         Assert.assertEquals(0.215d, ColorUtils.calculateLuminance(Color.argb(255, 128,128,128)), 0.001d);
         Assert.assertEquals(1d, ColorUtils.calculateLuminance(Color.WHITE));
 
-        System.out.println("MinimumAlpha(white.black.21): " + ColorUtils.calculateMinimumAlpha(Color.WHITE, Color.BLACK, 21));
-        System.out.println("MinimumAlpha(white.black.21): " + ColorUtils.calculateMinimumAlpha(Color.RED, Color.GREEN, 5));
-        System.out.println("MinimumAlpha(white.black.1): " + ColorUtils.calculateMinimumAlpha(Color.WHITE, Color.BLACK, 21));
+        Assert.assertEquals(255, ColorUtils.calculateMinimumAlpha(Color.WHITE, Color.BLACK, 21));
+        Assert.assertEquals(255, ColorUtils.calculateMinimumAlpha(Color.BLACK, Color.WHITE, 21));
+        Assert.assertEquals(-1, ColorUtils.calculateMinimumAlpha(Color.RED, Color.GREEN, 5));
 
     }
 
