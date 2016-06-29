@@ -16,6 +16,7 @@
 
 package com.shopgun.android.utils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -28,17 +29,78 @@ public class DateUtils {
         // private
     }
 
-    public static boolean isMidnight(Date d) {
-        return isMidnight(d, 0, 0);
+    /**
+     * Determine if the time of day of a given {@link Date} is at midnight. e.g.:
+     *
+     * <ul>
+     *      <li>"2016-06-29T00:00:00+0000" == {@code true}</li>
+     *      <li>"2016-06-29T00:00:01+0000" == {@code false}</li>
+     *      <li>"2016-06-29T23:59:59+0000" == {@code false}</li>
+     * </ul>
+     *
+     * @param date a date
+     */
+    public static boolean isMidnight(Date date) {
+        return isMidnight(date, 0, 0);
     }
 
-    public static boolean isMidnight(Date d, long delta) {
-        return isMidnight(d, delta, delta);
+    /**
+     * Determine if the time of day of a given {@link Date} is at midnight. The time doesn't have to
+     * be a strict match to midnight, you cen control this by increasing the {@code epsilon}, which
+     * is symmetrical on each side of midnight. e.g. the results with an epsilon of {@code 1000} is:
+     *
+     * <ul>
+     *      <li>"2016-06-29T00:00:00+0000" == {@code true}</li>
+     *      <li>"2016-06-29T00:00:01+0000" == {@code true}</li>
+     *      <li>"2016-06-29T23:59:59+0000" == {@code true}</li>
+     *      <li>"2016-06-29T00:00:01+0500" == {@code false}</li>
+     *      <li>"2016-06-29T23:59:58+0500" == {@code false}</li>
+     * </ul>
+     *
+     * @param date a date
+     * @param epsilon the amount of time to flex from actual midnight
+     * @return {@code true} if the time of day is at midnight (or within the given epsilon bounds), else {@code false}
+     */
+    public static boolean isMidnight(Date date, long epsilon) {
+        return isMidnight(date, epsilon, epsilon);
     }
 
-    public static boolean isMidnight(Date date, long toMidnightDelta, long afterMidnightDelta) {
-        long remainder = date.getTime() % DAY_IN_MILLIS;
-        return (DAY_IN_MILLIS-toMidnightDelta) <= remainder || remainder <= afterMidnightDelta;
+    /**
+     * Determine if the time of day of a given {@link Date} is at midnight. The time doesn't have to
+     * be a strict match to midnight, you cen control this by increasing the {@code epsilon} on each
+     * each 'side' of midnight. e.g. the results with an epsilon of {@code 1000} on both 'sides' of
+     * midnight is:
+     *
+     * <ul>
+     *      <li>"2016-06-29T00:00:00+0000" == {@code true}</li>
+     *      <li>"2016-06-29T00:00:01+0000" == {@code true}</li>
+     *      <li>"2016-06-29T23:59:59+0000" == {@code true}</li>
+     *      <li>"2016-06-29T00:00:01+0500" == {@code false}</li>
+     *      <li>"2016-06-29T23:59:58+0500" == {@code false}</li>
+     * </ul>
+     *
+     * @param date a date
+     * @param epsilonToMidnight the amount of time to flex prior to midnight
+     * @param epsilonAfterMidnight the amount of time to flex past midnight
+     * @return {@code true} if the time of day is at midnight (or within the given epsilon bounds), else {@code false}
+     */
+    public static boolean isMidnight(Date date, long epsilonToMidnight, long epsilonAfterMidnight) {
+        long remainder = getTimeOfDayWithTimeZone(date) % DAY_IN_MILLIS;
+        return (DAY_IN_MILLIS-epsilonToMidnight) <= remainder || remainder <= epsilonAfterMidnight;
+    }
+
+    /**
+     * Calculates the time of day (in milliseconds) of the {@code date} given.
+     * <p>e.g. the date {@code 2016-06-13 01:00am} will result in {@code 3600000}</p>
+     * @param date a date
+     * @return the time of day
+     */
+    public static long getTimeOfDayWithTimeZone(Date date) {Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int h = c.get(Calendar.HOUR_OF_DAY);
+        int m = c.get(Calendar.MINUTE);
+        int s = c.get(Calendar.SECOND);
+        return TimeUnit.HOURS.toMillis(h) + TimeUnit.MINUTES.toMillis(m)+ TimeUnit.SECONDS.toMillis(s);
     }
 
     /**
