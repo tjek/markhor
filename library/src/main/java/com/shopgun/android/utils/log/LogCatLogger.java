@@ -72,28 +72,28 @@ public class LogCatLogger implements Logger {
 
     private int log(int level, String tag, String msg, Throwable tr) {
 
+        if (level < mMinLevel) {
+            return 0;
+        }
+
+        // use thread lock to ensure all output is bundled in the console
         synchronized (LogCatLogger.class) {
 
-            if (level < mMinLevel) {
-                return 0;
-            }
-
             if (msg.length() > 4000) {
-
-                int bytesWritten = 0;
-                int chunkCount = msg.length() / 4000;
-                for (int i = 0; i <= chunkCount; i++) {
-                    int max = 4000 * (i + 1);
-                    int end = (max >= msg.length()) ? msg.length() : max;
-                    String msgChunk = String.format(CHUNK_FORMAT, i, chunkCount, msg.substring(4000 * i, end));
-                    if (i == chunkCount && tr != null) {
-                        bytesWritten += logToLogCat(level, tag, msgChunk, tr);
-                    } else {
-                        bytesWritten += logToLogCat(level, tag, msgChunk);
+                // Print long messages
+                    int bytesWritten = 0;
+                    int chunkCount = msg.length() / 4000;
+                    for (int i = 0; i <= chunkCount; i++) {
+                        int max = 4000 * (i + 1);
+                        int end = (max >= msg.length()) ? msg.length() : max;
+                        String msgChunk = String.format(CHUNK_FORMAT, i, chunkCount, msg.substring(4000 * i, end));
+                        if (i == chunkCount && tr != null) {
+                            bytesWritten += logToLogCat(level, tag, msgChunk, tr);
+                        } else {
+                            bytesWritten += logToLogCat(level, tag, msgChunk);
+                        }
                     }
-                }
-                return bytesWritten;
-
+                    return bytesWritten;
             }
 
             if (tr != null) {
@@ -119,8 +119,7 @@ public class LogCatLogger implements Logger {
             case Log.ERROR:
                 return Log.e(tag, msg);
             default:
-                throw new IllegalArgumentException("Invalid log level: " + level +
-                        ". Log level must be in the range [2-6], see android.util.Log for more info");
+                return 0;
         }
     }
 
@@ -137,8 +136,7 @@ public class LogCatLogger implements Logger {
             case Log.ERROR:
                 return Log.e(tag, msg, tr);
             default:
-                throw new IllegalArgumentException("Invalid log level: " + level +
-                        ". Log level must be in the range [2-6], see android.util.Log for more info");
+                return 0;
         }
     }
 
