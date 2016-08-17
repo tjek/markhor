@@ -18,6 +18,8 @@ package com.shopgun.android.utils;
 
 import android.annotation.SuppressLint;
 
+import java.util.regex.Pattern;
+
 public class TextUtils {
 
     public static final String TAG = Tag.from(TextUtils.class);
@@ -38,6 +40,60 @@ public class TextUtils {
             sb.append(token);
         }
         return sb.toString();
+    }
+
+    /**
+     * Returns a string containing the tokens joined by delimiters.
+     * @param tokens an array objects to be joined. Strings will be formed from
+     *     the objects by calling object.toString().
+     */
+    public static String join(CharSequence delimiter, Object[] tokens) {
+        return android.text.TextUtils.join(delimiter, tokens);
+    }
+
+    /**
+     * Returns a string containing the tokens joined by delimiters.
+     * @param tokens an array objects to be joined. Strings will be formed from
+     *     the objects by calling object.toString().
+     */
+    public static String join(CharSequence delimiter, Iterable tokens) {
+        return android.text.TextUtils.join(delimiter, tokens);
+    }
+
+    /**
+     * String.split() returns [''] when the string to be split is empty. This returns []. This does
+     * not remove any empty strings from the result. For example split("a,", ","  ) returns {"a", ""}.
+     *
+     * @param text the string to split
+     * @param expression the regular expression to match
+     * @return an array of strings. The array will be empty if text is empty
+     *
+     * @throws NullPointerException if expression or text is null
+     */
+    public static String[] split(String text, String expression) {
+        return android.text.TextUtils.split(text, expression);
+    }
+
+    /**
+     * Splits a string on a pattern. String.split() returns [''] when the string to be
+     * split is empty. This returns []. This does not remove any empty strings from the result.
+     * @param text the string to split
+     * @param pattern the regular expression to match
+     * @return an array of strings. The array will be empty if text is empty
+     *
+     * @throws NullPointerException if expression or text is null
+     */
+    public static String[] split(String text, Pattern pattern) {
+        return android.text.TextUtils.split(text, pattern);
+    }
+
+    /**
+     * Returns true if the string is null or 0-length.
+     * @param str the string to be examined
+     * @return true if str is null or zero length
+     */
+    public static boolean isEmpty(CharSequence str) {
+        return android.text.TextUtils.isEmpty(str);
     }
 
     /**

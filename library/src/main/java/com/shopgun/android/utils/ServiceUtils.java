@@ -16,6 +16,9 @@
 
 package com.shopgun.android.utils;
 
+/**
+ * For now this class remains empty, too many unused imports.
+ */
 public class ServiceUtils {
 
     public static final String TAG = Tag.from(ServiceUtils.class);
