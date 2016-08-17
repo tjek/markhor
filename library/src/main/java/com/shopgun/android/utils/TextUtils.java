@@ -88,15 +88,6 @@ public class TextUtils {
     }
 
     /**
-     * Returns true if the string is null or 0-length.
-     * @param str the string to be examined
-     * @return true if str is null or zero length
-     */
-    public static boolean isEmpty(CharSequence str) {
-        return android.text.TextUtils.isEmpty(str);
-    }
-
-    /**
      * Converts a string into it's camel case equivalent. But only if the String is all upper case.<br>
      * An example with 'space' (" ") as split:
      * <li>"AN EXAMPLE STRING" -> "An Example String"</li>
@@ -176,7 +167,7 @@ public class TextUtils {
      * @param str the string to be examined
      * @return true if str is null or zero length
      */
-    public static boolean isEmpty(String str) {
+    public static boolean isEmpty(CharSequence str) {
         return (str == null || str.length() == 0);
     }
 
