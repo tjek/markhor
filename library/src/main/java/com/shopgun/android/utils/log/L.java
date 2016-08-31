@@ -7,6 +7,10 @@ public class L {
 
     private static volatile Logger mLogger = new LogCatLogger(0);
 
+    public static Logger getLogger() {
+        return mLogger;
+    }
+
     public static void setLogger(Logger logger) {
         mLogger = (logger == null ? new LogCatLogger(0) : logger);
     }
