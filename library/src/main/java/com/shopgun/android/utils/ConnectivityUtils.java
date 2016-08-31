@@ -6,6 +6,12 @@ import android.net.NetworkInfo;
 
 public class ConnectivityUtils {
 
+    public static final String TAG = Tag.from(ConnectivityUtils.class);
+
+    private ConnectivityUtils() {
+        // private constructor
+    }
+
     /**
      * Method for determining the current network state
      * @return true if network connectivity exists, false otherwise.
