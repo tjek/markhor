@@ -43,6 +43,24 @@ public class TextUtils {
     }
 
     /**
+     * Method for joining an array of float
+     *
+     * @param delimiter A string to join the int's by
+     * @param tokens    the values
+     * @return A formatted string
+     */
+    public static String join(CharSequence delimiter, float[] tokens) {
+        StringBuilder sb = new StringBuilder();
+        for (Object token : tokens) {
+            if (sb.length() != 0) {
+                sb.append(delimiter);
+            }
+            sb.append(token);
+        }
+        return sb.toString();
+    }
+
+    /**
      * Returns a string containing the tokens joined by delimiters.
      * @param tokens an array objects to be joined. Strings will be formed from
      *     the objects by calling object.toString().
