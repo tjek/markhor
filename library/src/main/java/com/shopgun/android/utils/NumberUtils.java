@@ -71,4 +71,56 @@ public class NumberUtils {
         return Double.compare(lhs, rhs) == 0 || Math.abs(lhs - rhs) <= epsilon;
     }
 
+    /**
+     * Clamp the current value in between a min and max value.
+     * @param min the lower bound
+     * @param current value to check
+     * @param max the upper bound
+     * @return {@code min} if {@code current} if less than {@code min},
+     * or {@code max} if {@code current} is greater than {@code max},
+     * else {@code current}.
+     */
+    public static float clamp(float min, float current, float max) {
+        return Math.max(min, Math.min(current, max));
+    }
+
+    /**
+     * Clamp the current value in between a min and max value.
+     * @param min the lower bound
+     * @param current value to check
+     * @param max the upper bound
+     * @return {@code min} if {@code current} if less than {@code min},
+     * or {@code max} if {@code current} is greater than {@code max},
+     * else {@code current}.
+     */
+    public static long clamp(long min, long current, long max) {
+        return Math.max(min, Math.min(current, max));
+    }
+
+    /**
+     * Clamp the current value in between a min and max value.
+     * @param min the lower bound
+     * @param current value to check
+     * @param max the upper bound
+     * @return {@code min} if {@code current} if less than {@code min},
+     * or {@code max} if {@code current} is greater than {@code max},
+     * else {@code current}.
+     */
+    public static int clamp(int min, int current, int max) {
+        return Math.max(min, Math.min(current, max));
+    }
+
+    /**
+     * Clamp the current value in between a min and max value.
+     * @param min the lower bound
+     * @param current value to check
+     * @param max the upper bound
+     * @return {@code min} if {@code current} if less than {@code min},
+     * or {@code max} if {@code current} is greater than {@code max},
+     * else {@code current}.
+     */
+    public static double clamp(double min, double current, double max) {
+        return Math.max(min, Math.min(current, max));
+    }
+
 }
