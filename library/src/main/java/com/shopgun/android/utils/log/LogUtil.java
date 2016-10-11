@@ -46,4 +46,14 @@ public class LogUtil {
         }
     }
 
+    public static void printStackTrace(Logger logger, String tag, int first, int last) {
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        first = Math.min(first, stackTraceElements.length);
+        last = Math.min(last, stackTraceElements.length);
+        for (int i = first; i < last; i++) {
+            StackTraceElement ste = stackTraceElements[i];
+            L.d(tag, String.valueOf(ste));
+        }
+    }
+
 }
