@@ -109,9 +109,6 @@ import java.util.List;
  * with {@link android.app.ActionBar} tabs.  You can find other examples of using
  * ViewPager in the API 4+ Support Demos and API 13+ Support Demos sample code.
  *
- * {@sample development/samples/Support13Demos/src/com/example/android/supportv13/app/ActionBarTabsPager.java
- *      complete}
- *
  */
 public class CenteredViewPager extends ViewGroup {
     private static final String TAG = CenteredViewPager.class.getSimpleName();

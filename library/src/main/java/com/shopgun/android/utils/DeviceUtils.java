@@ -18,6 +18,7 @@ package com.shopgun.android.utils;
 
 import android.content.Context;
 import android.location.LocationManager;
+import android.os.Build;
 
 import java.util.List;
 
@@ -40,6 +41,76 @@ public class DeviceUtils {
         }
         List<String> providers = mgr.getAllProviders();
         return providers != null && providers.contains(LocationManager.GPS_PROVIDER);
+    }
+
+    public static String getRadio() {
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                return Build.getRadioVersion();
+            } else {
+                return Build.RADIO;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Get the build version of the device.
+     * @return build version
+     */
+    public static String getBuildVersion() {
+        return android.os.Build.VERSION.RELEASE;
+    }
+
+    /**
+     * Get the device manufacturer.
+     * <p> A Samsung GT-P3110, will return "Samsung"
+     * @return phone model
+     */
+    public static String getManufacturer() {
+        return capitalize(android.os.Build.MANUFACTURER);
+    }
+
+    /**
+     * Get the device model.
+     * <p> A Samsung GT-P3110, will return "GT-P3110"
+     * @return phone model
+     */
+    public static String getModel() {
+        return android.os.Build.MODEL == null ?
+                null :
+                android.os.Build.MODEL.replace(
+                        android.os.Build.MANUFACTURER, "")
+                        .trim();
+    }
+
+    /**
+     * Get the device model.
+     * <p> A Samsung GT-P3110, will return "Samsung GT-P3110"
+     * @return phone manufacturer and model
+     */
+    public static String getManufacturerAndModel() {
+        String manufacturer = android.os.Build.MANUFACTURER;
+        String model = android.os.Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            model = capitalize(model);
+        } else {
+            model = capitalize(manufacturer) + " " + model;
+        }
+        return model;
+    }
+
+    private static String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
+        }
     }
 
 }

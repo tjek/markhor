@@ -45,7 +45,7 @@ public class TextUtils {
     /**
      * Method for joining an array of float
      *
-     * @param delimiter A string to join the int's by
+     * @param delimiter A CharSequence to join the {@code tokens} by
      * @param tokens    the values
      * @return A formatted string
      */
@@ -62,8 +62,11 @@ public class TextUtils {
 
     /**
      * Returns a string containing the tokens joined by delimiters.
+     *
+     * @param delimiter A CharSequence to join the {@code tokens} by
      * @param tokens an array objects to be joined. Strings will be formed from
      *     the objects by calling object.toString().
+     * @return A string of the joined items
      */
     public static String join(CharSequence delimiter, Object[] tokens) {
         return android.text.TextUtils.join(delimiter, tokens);
@@ -71,8 +74,10 @@ public class TextUtils {
 
     /**
      * Returns a string containing the tokens joined by delimiters.
+     * @param delimiter A CharSequence to join the {@code tokens} by
      * @param tokens an array objects to be joined. Strings will be formed from
      *     the objects by calling object.toString().
+     * @return A string of the joined items
      */
     public static String join(CharSequence delimiter, Iterable tokens) {
         return android.text.TextUtils.join(delimiter, tokens);
@@ -108,8 +113,10 @@ public class TextUtils {
     /**
      * Converts a string into it's camel case equivalent. But only if the String is all upper case.<br>
      * An example with 'space' (" ") as split:
-     * <li>"AN EXAMPLE STRING" -> "An Example String"</li>
-     * <li>"AN EXampLE STRING" -> "AN EXampLE STRING"</li>
+     * <ul>
+     * <li>"AN EXAMPLE STRING" - "An Example String"</li>
+     * <li>"AN EXampLE STRING" - "AN EXampLE STRING"</li>
+     * </ul>
      *
      * @param word A string to convert
      * @param splitChar  The regular expression to split the string on
@@ -132,7 +139,7 @@ public class TextUtils {
 
     /**
      * Converts a string into it's camel case equivalent.<br>
-     * An example with 'space' (" ") as split: "an example string" -> "An Example String".
+     * An example with 'space' (" ") as split: "an example string" - "An Example String".
      *
      * @param word  A string to convert
      * @param split The regular expression to split the string on

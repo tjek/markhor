@@ -27,9 +27,11 @@ public class BitmapUtils {
     public static final String TAG = Tag.from(BitmapUtils.class);
 
     /**
-     * Convert any view into a Bitmap
+     * Convert any view into a Bitmap. If no bitmap can be generated from the view
+     * then {@code defBackgroundColor} will be used to fill the bitmap.
      *
      * @param view A View to convert
+     * @param defBackgroundColor the default bitmap color
      * @return A bitmap
      */
     public static Bitmap getBitmapFromView(View view, int defBackgroundColor) {

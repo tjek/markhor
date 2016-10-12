@@ -53,7 +53,7 @@ public class PackageUtils {
      * <p>Fallback mode to the old Market if needed.
      *
      * @param ctx a context
-     * @throws ActivityNotFoundException
+     * @throws ActivityNotFoundException &nbsp;
      */
     public static void openGooglePlay(Context ctx) throws ActivityNotFoundException {
         openGooglePlay(ctx, ctx.getPackageName());
@@ -65,7 +65,7 @@ public class PackageUtils {
      *
      * @param ctx a context
      * @param packageName the package to show in Google Play
-     * @throws ActivityNotFoundException
+     * @throws ActivityNotFoundException &nbsp;
      */
     public static void openGooglePlay(Context ctx, String packageName) throws ActivityNotFoundException {
         try {
@@ -87,7 +87,8 @@ public class PackageUtils {
      *
      * @param c A {@link Context} to get the the info from
      * @return A version name string, or {@code null}
-     * @throws ContextPackageNameNotFoundException
+     * @throws ContextPackageNameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static String getVersionName(Context c) throws ContextPackageNameNotFoundException {
         return getPackageInfo(c).versionName;
@@ -98,7 +99,8 @@ public class PackageUtils {
      *
      * @param c A {@link Context} to get the the info from
      * @return A version name string, or {@code null}
-     * @throws ContextPackageNameNotFoundException
+     * @throws ContextPackageNameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static int getVersionCode(Context c) throws ContextPackageNameNotFoundException {
         return getPackageInfo(c).versionCode;
@@ -109,7 +111,8 @@ public class PackageUtils {
      *
      * @param c a context
      * @return Returns a PackageInfo object containing information about the package.
-     * @throws ContextPackageNameNotFoundException
+     * @throws ContextPackageNameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static PackageInfo getPackageInfo(Context c) throws ContextPackageNameNotFoundException {
         return getPackageInfo(c, 0);
@@ -127,7 +130,8 @@ public class PackageUtils {
      *            {@link PackageManager#GET_SIGNATURES}, {@link PackageManager#GET_UNINSTALLED_PACKAGES} to
      *            modify the data returned.
      * @return Returns a PackageInfo object containing information about the package.
-     * @throws ContextPackageNameNotFoundException
+     * @throws ContextPackageNameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static PackageInfo getPackageInfo(Context c, int flags) throws ContextPackageNameNotFoundException {
         try {
@@ -142,7 +146,8 @@ public class PackageUtils {
      *
      * @param c a context
      * @return Returns ApplicationInfo object containing information about the package.
-     * @throws ContextPackageNameNotFoundException
+     * @throws ContextPackageNameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static Bundle getMetaData(Context c) {
         return getApplicationInfo(c, PackageManager.GET_META_DATA).metaData;
@@ -153,7 +158,8 @@ public class PackageUtils {
      *
      * @param c a context
      * @return Returns ApplicationInfo object containing information about the package.
-     * @throws ContextPackageNameNotFoundException
+     * @throws ContextPackageNameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static ApplicationInfo getApplicationInfo(Context c) throws ContextPackageNameNotFoundException {
         try {
@@ -171,7 +177,8 @@ public class PackageUtils {
      * {@link PackageManager#GET_META_DATA}, {@link PackageManager#GET_SHARED_LIBRARY_FILES},
      * {@link PackageManager#GET_UNINSTALLED_PACKAGES} to modify the data returned.
      * @return Returns ApplicationInfo object containing information about the package.
-     * @throws ContextPackageNameNotFoundException
+     * @throws ContextPackageNameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static ApplicationInfo getApplicationInfo(Context c, int flags) throws ContextPackageNameNotFoundException {
         try {
@@ -187,6 +194,8 @@ public class PackageUtils {
      * <p>Throws {@link android.content.pm.PackageManager.NameNotFoundException} if an application
      * with the given package name cannot be found on the system.
      *
+     * <p>For more info see {@link PackageManager#getApplicationInfo(String, int)}</p>
+     *
      * @param c a context
      * @param packageName The full name of the package, e.i. com.shopgun.android.shopgun.
      * @param flags Additional option flags. Use any combination of
@@ -197,8 +206,8 @@ public class PackageUtils {
      *            {@link PackageManager#GET_SIGNATURES}, {@link PackageManager#GET_UNINSTALLED_PACKAGES} to
      *            modify the data returned.
      * @return Returns a PackageInfo object containing information about the package.
-     * @throws android.content.pm.PackageManager.NameNotFoundException
-     * @see {@link PackageManager#getApplicationInfo(String, int)}
+     * @throws android.content.pm.PackageManager.NameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static PackageInfo getPackageInfo(Context c, String packageName, int flags) throws PackageManager.NameNotFoundException {
         return c.getPackageManager().getPackageInfo(packageName, flags);
@@ -210,14 +219,16 @@ public class PackageUtils {
      * <p>Throws {@link android.content.pm.PackageManager.NameNotFoundException} if an application
      * with the given package name cannot be found on the system.
      *
+     * <p>For more info see {@link PackageManager#getApplicationInfo(String, int)}</p>
+     *
      * @param c a context
      * @param packageName The full name of the package, e.i. com.shopgun.android.shopgun.
      * @param flags Additional option flags. Use any combination of
      * {@link PackageManager#GET_META_DATA}, {@link PackageManager#GET_SHARED_LIBRARY_FILES},
      * {@link PackageManager#GET_UNINSTALLED_PACKAGES} to modify the data returned.
      * @return Returns ApplicationInfo object containing information about the package.
-     * @throws android.content.pm.PackageManager.NameNotFoundException
-     * @see {@link PackageManager#getApplicationInfo(String, int)}
+     * @throws android.content.pm.PackageManager.NameNotFoundException if a package with the given
+     *             name cannot be found on the system.
      */
     public static ApplicationInfo getApplicationInfo(Context c, String packageName, int flags) throws PackageManager.NameNotFoundException {
         return c.getPackageManager().getApplicationInfo(packageName, flags);

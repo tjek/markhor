@@ -7,6 +7,7 @@ public class LogUtil {
     /**
      * Print the calling method by name and linenumber.
      * <p>com.shopgun.android.utils.MyClass.myMethod(MyClass.java:87)</p>
+     * @param logger A logger for output
      */
     public static void printCallingMethod(Logger logger) {
         printMethod(logger, 4);
@@ -26,6 +27,7 @@ public class LogUtil {
      * Print the calling method by name and linenumber.
      * <p>com.shopgun.android.utils.MyClass.myMethod(MyClass.java:87)</p>
      *
+     * @param logger A logger for output
      * @param element argument to easily evaluate it
      */
     public static void printMethod(Logger logger, int element) {
@@ -49,6 +51,7 @@ public class LogUtil {
     /**
      * Print a StackTrace from any given point of your source code.
      * Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
+     * @param logger A logger for output
      */
     public static void printStackTrace(Logger logger) {
         String tag = Thread.currentThread().getStackTrace()[3].getClass().getSimpleName();
@@ -67,8 +70,8 @@ public class LogUtil {
 
     /**
      * Print a StackTrace from any given point of your source code.
-     * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
      * @param logger A logger for output
+     * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
      */
     public static void printStackTrace(Logger logger, String tag) {
         for (StackTraceElement ste : Thread.currentThread().getStackTrace()) {

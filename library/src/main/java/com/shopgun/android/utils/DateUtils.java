@@ -39,6 +39,7 @@ public class DateUtils {
      * </ul>
      *
      * @param date a date
+     * @return {@code true} if the time of day is at midnight, else {@code false}
      */
     public static boolean isMidnight(Date date) {
         return isMidnight(date, 0, 0);

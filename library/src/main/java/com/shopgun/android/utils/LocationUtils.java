@@ -47,6 +47,7 @@ public class LocationUtils {
      * @param newLocation     The new Location that you want to evaluate
      * @param currentLocation The current Location fix, to which you want to compare the new
      *                        one
+     * @return {@code true} if the {@code newLocation} is better than the {@code currentLocation}, else {@code false}
      */
     public static boolean isBetterLocation(Location newLocation, Location currentLocation) {
 
@@ -112,6 +113,9 @@ public class LocationUtils {
 
     /**
      * Checks whether two providers are the same
+     * @param provider1 a provider
+     * @param provider2 another provider
+     * @return {@code true} if the providers are the same, else {@code false}
      */
     public static boolean isSameProvider(String provider1, String provider2) {
         if (provider1 == null) {

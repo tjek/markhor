@@ -14,6 +14,7 @@ public class ConnectivityUtils {
 
     /**
      * Method for determining the current network state
+     * @param context a context
      * @return true if network connectivity exists, false otherwise.
      */
     public static boolean isOnline(Context context) {
