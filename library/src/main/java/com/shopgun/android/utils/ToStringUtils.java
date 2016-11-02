@@ -2,6 +2,7 @@ package com.shopgun.android.utils;
 
 import android.content.res.Configuration;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 public class ToStringUtils {
 
@@ -21,6 +22,20 @@ public class ToStringUtils {
             case Configuration.ORIENTATION_LANDSCAPE: return "ORIENTATION_LANDSCAPE";
             case Configuration.ORIENTATION_SQUARE: return "ORIENTATION_SQUARE";
             default: return "ORIENTATION_UNKNOWN";
+        }
+    }
+
+    /**
+     * Get the {@link android.view.View.MeasureSpec} mode, as a {@code String}
+     * @param mode A {@link android.view.View.MeasureSpec} mode
+     * @return The MeasureSpec mode as a string
+     */
+    public static String measureSpecMode(int mode) {
+        switch (mode) {
+            case View.MeasureSpec.UNSPECIFIED: return "UNSPECIFIED";
+            case View.MeasureSpec.EXACTLY: return "EXACTLY";
+            case View.MeasureSpec.AT_MOST: return "AT_MOST";
+            default: return "UNSPECIFIED";
         }
     }
 
