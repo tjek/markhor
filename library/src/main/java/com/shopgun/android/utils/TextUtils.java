@@ -25,6 +25,17 @@ public class TextUtils {
     public static final String TAG = Tag.from(TextUtils.class);
 
     /**
+     * Method for joining an array of int.
+     * The values will be joined by ',' (comma).
+     *
+     * @param tokens    the values
+     * @return A formatted string
+     */
+    public static String join(int[] tokens) {
+        return join(",", tokens);
+    }
+
+    /**
      * Method for joining an array of int
      *
      * @param delimiter A string to join the int's by
@@ -40,6 +51,17 @@ public class TextUtils {
             sb.append(token);
         }
         return sb.toString();
+    }
+
+    /**
+     * Method for joining an array of float
+     * The values will be joined by ',' (comma).
+     *
+     * @param tokens    the values
+     * @return A formatted string
+     */
+    public static String join(float[] tokens) {
+        return join(",", tokens);
     }
 
     /**
@@ -62,6 +84,18 @@ public class TextUtils {
 
     /**
      * Returns a string containing the tokens joined by delimiters.
+     * The values will be joined by ',' (comma).
+     *
+     * @param tokens an array objects to be joined. Strings will be formed from
+     *     the objects by calling object.toString().
+     * @return A string of the joined items
+     */
+    public static String join(Object[] tokens) {
+        return android.text.TextUtils.join(",", tokens);
+    }
+
+    /**
+     * Returns a string containing the tokens joined by delimiters.
      *
      * @param delimiter A CharSequence to join the {@code tokens} by
      * @param tokens an array objects to be joined. Strings will be formed from
@@ -70,6 +104,18 @@ public class TextUtils {
      */
     public static String join(CharSequence delimiter, Object[] tokens) {
         return android.text.TextUtils.join(delimiter, tokens);
+    }
+
+    /**
+     * Returns a string containing the tokens joined by delimiters.
+     * The values will be joined by ',' (comma).
+     *
+     * @param tokens an array objects to be joined. Strings will be formed from
+     *     the objects by calling object.toString().
+     * @return A string of the joined items
+     */
+    public static String join(Iterable tokens) {
+        return android.text.TextUtils.join(",", tokens);
     }
 
     /**
