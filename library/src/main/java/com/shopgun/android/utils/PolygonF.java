@@ -129,9 +129,7 @@ public class PolygonF implements Parcelable {
             mMinY = Math.min(mMinY, y);
             mMaxY = Math.max(mMaxY, y);
         }
-        int iMinX = (int)Math.floor(mMinX);
-        int iMinY = (int)Math.floor(mMinY);
-        mBounds = new RectF(iMinX, iMinY, (int)(mMaxX -iMinX+0.5), (int)(mMaxY -iMinY+0.5));
+        mBounds = new RectF(mMinX, mMinY, mMaxX, mMaxY);
     }
 
     /**
