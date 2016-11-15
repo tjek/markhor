@@ -46,12 +46,21 @@ public class PolygonF implements Parcelable {
         this(new float[size], new float[size], 0);
     }
 
-    /** Constructs a PolygonF from x and y arrays. */
+    /**
+     * Constructs a {@link PolygonF} from x and y arrays.
+     * @param xpoints an array of x-coordinates for the {@link PolygonF}
+     * @param ypoints an array of x-coordinates for the {@link PolygonF}
+     */
     public PolygonF(float xpoints[], float ypoints[]) {
         this(xpoints, ypoints, xpoints.length);
     }
 
-    /** Constructs a PolygonF from x and y arrays. */
+    /**
+     * Constructs a {@link PolygonF} from x and y arrays.
+     * @param xpoints an array of x-coordinates for the {@link PolygonF}
+     * @param ypoints an array of x-coordinates for the {@link PolygonF}
+     * @param npoints the number of points in the {@link PolygonF}
+     */
     public PolygonF(float xpoints[], float ypoints[], int npoints) {
         if (xpoints.length!=ypoints.length)
             throw new IllegalArgumentException("xpoints.length!=ypoints.length");
@@ -60,16 +69,25 @@ public class PolygonF implements Parcelable {
         this.ypoints = ypoints;
     }
 
-	/** Constructs a PolygonF from a Polygon. **/
+    /**
+     * Constructs a {@link PolygonF} from an existing {@link PolygonF}.
+     * @param polygon A polygon
+     */
 	public PolygonF(PolygonF polygon) {
-		npoints = polygon.npoints;
-		xpoints = Arrays.copyOf(polygon.xpoints, polygon.xpoints.length);
-        ypoints = Arrays.copyOf(polygon.ypoints, polygon.ypoints.length);
+        this(Arrays.copyOf(polygon.xpoints, polygon.xpoints.length),
+                Arrays.copyOf(polygon.ypoints, polygon.ypoints.length),
+                polygon.npoints);
 	}
 
-    /** Returns 'true' if the point (x,y) is inside this polygon. This is a Java
-     version of the remarkably small C program by W. Randolph Franklin at
-     http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html#The%20C%20Code
+    /**
+     * Check if a given point (x, y) is inside this {@link PolygonF}
+     *
+     * <p>This is a Java version of the remarkably small C program by W. Randolph Franklin at
+     * http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html#The%20C%20Code</p>
+     *
+     * @param x The x-coordinate of the point to check
+     * @param y The y-coordinate of the point to check
+     * @return {@code true} if the point (x, y) is inside this {@link PolygonF}, else {@code false}.
      */
     public boolean contains(float x, float y) {
         boolean inside = false;
@@ -81,6 +99,9 @@ public class PolygonF implements Parcelable {
         return inside;
     }
 
+    /**
+     * @return Get the bounding rect for this {@link PolygonF}
+     */
     public RectF getBounds() {
         if (npoints==0)
             return new RectF();
@@ -89,6 +110,12 @@ public class PolygonF implements Parcelable {
         return mBounds;
     }
 
+    /**
+     * Calculate the bounds for this {@link PolygonF}
+     * @param xpoints The x-coordinates for the polygon
+     * @param ypoints The y-coordinates for the polygon
+     * @param npoints The number of points in the polygon
+     */
     void calculateBounds(float[] xpoints, float[] ypoints, int npoints) {
         mMinX = Float.MAX_VALUE;
         mMinY = Float.MAX_VALUE;
@@ -107,6 +134,11 @@ public class PolygonF implements Parcelable {
         mBounds = new RectF(iMinX, iMinY, (int)(mMaxX -iMinX+0.5), (int)(mMaxY -iMinY+0.5));
     }
 
+    /**
+     * Add a point to the polygon
+     * @param x The x-coordinate
+     * @param y The y-coordinate
+     */
     public void addPoint(float x, float y) {
         if (npoints==xpoints.length) {
             float[] tmp = new float[npoints*2];
@@ -122,10 +154,18 @@ public class PolygonF implements Parcelable {
         mBounds = null;
     }
 
+    /**
+     * Add a point to the polygon
+     * @param x The x-coordinate
+     * @param y The y-coordinate
+     */
     public void addPoint(double x, double y) {
         addPoint((float)x, (float)y);
     }
 
+    /**
+     * @return Create a deep-copy of this polygon.
+     */
     public PolygonF duplicate() {
         return new PolygonF(
                 Arrays.copyOf(xpoints, xpoints.length),
@@ -133,7 +173,11 @@ public class PolygonF implements Parcelable {
                 npoints);
     }
 
-    /* Returns the length of this polygon or line. */
+    /**
+     * Returns the length of this polygon or line.
+     * @param isLine {@code true} if this polygon is a line, else {@code false}
+     * @return the length
+     */
     public double getLength(boolean isLine) {
         double dx, dy;
         double length = 0.0;
@@ -156,8 +200,7 @@ public class PolygonF implements Parcelable {
     }
 
     /**
-     * Return a string representation of the rectangle in a compact form.
-     * @hide
+     * @return a string representation of the polygon in a compact form.
      */
     public String toShortString() {
         StringBuilder sb = new StringBuilder();
