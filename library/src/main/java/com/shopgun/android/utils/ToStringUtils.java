@@ -1,5 +1,6 @@
 package com.shopgun.android.utils;
 
+import android.content.ComponentCallbacks2;
 import android.content.res.Configuration;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
@@ -84,6 +85,19 @@ public class ToStringUtils {
             case MotionEvent.ACTION_POINTER_2_UP: return "ACTION_POINTER_2_UP";
             case MotionEvent.ACTION_POINTER_3_UP: return "ACTION_POINTER_3_UP";
             default: return "ACTION_UNKNOWN";
+        }
+    }
+
+    public static String onTrimMemoryToString(int level) {
+        switch (level) {
+            case ComponentCallbacks2.TRIM_MEMORY_BACKGROUND: return "TRIM_MEMORY_BACKGROUND";
+            case ComponentCallbacks2.TRIM_MEMORY_COMPLETE: return "TRIM_MEMORY_COMPLETE";
+            case ComponentCallbacks2.TRIM_MEMORY_MODERATE: return "TRIM_MEMORY_MODERATE";
+            case ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL: return "TRIM_MEMORY_RUNNING_CRITICAL";
+            case ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW: return "TRIM_MEMORY_RUNNING_LOW";
+            case ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE: return "TRIM_MEMORY_RUNNING_MODERATE";
+            case ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN: return "TRIM_MEMORY_UI_HIDDEN";
+            default: return "UNKNOWN";
         }
     }
 
