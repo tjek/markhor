@@ -12,31 +12,6 @@ buildscript {
     }
 }
 
-ext {
-
-    PROJ_DRYRUN=true
-
-    PROJ_REPO='maven'
-    PROJ_GROUP='com.shopgun.android'
-    PROJ_ARTIFACTID='utils'
-    PROJ_VERSION='1.0.7'
-    PROJ_NAME='utils'
-    PROJ_ORG='shopgun'
-    PROJ_WEBSITEURL='https://shopgun.com'
-    PROJ_ISSUETRACKERURL='https://github.com/shopgun/markhor/issues'
-    PROJ_VCSURL='https://github.com/shopgun/markhor.git'
-    PROJ_DESCRIPTION='A set of utilities used for ShopGun Android projects'
-    PROJ_LABELS=['shopgun', 'android', 'sdk', 'api', 'etilbudsavis', 'utils', 'utilities']
-
-    DEVELOPER_ID='shopgun'
-    DEVELOPER_NAME='ShopGun'
-    DEVELOPER_EMAIL='danny@shopgun.com'
-
-    LICENSE_ALL=["Apache-2.0"]
-    LICENSE_NAME='The Apache Software License, Version 2.0'
-    LICENSE_URL='http://www.apache.org/licenses/LICENSE-2.0.txt'
-}
-
 android {
 
     compileSdkVersion rootProject.compileSdkVersion
@@ -70,6 +45,4 @@ dependencies {
     testCompile libs.mockito
 }
 
-// Apply the Bintray plugin. Do release with "gradlew bintrayUpload"
-// Setup BINTRAY_USER and BINTRAY_KEY in your global gradle.properties to upload
 apply from: 'bintray.gradle'
