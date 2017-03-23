@@ -16,8 +16,11 @@
 
 package com.shopgun.android.utils;
 
+import java.text.ParseException;
+import java.text.ParsePosition;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class DateUtils {
@@ -120,6 +123,59 @@ public class DateUtils {
             date.setTime(1000 * (date.getTime() / 1000));
         }
         return date;
+    }
+
+    /**
+     * Parse a date from ISO-8601 formatted string. It expects a format
+     * [yyyy-MM-dd|yyyyMMdd][T(hh:mm[:ss[.sss]]|hhmm[ss[.sss]])]?[Z|[+-]hh:mm]]
+     *
+     * Method is a wrapper around Jackson databind ISO8601Utils.java
+     *
+     * @param date ISO string to parse in the appropriate format.
+     * @return the parsed date
+     * @throws ParseException if the date is not in the appropriate format
+     */
+    public static Date parse(String date) throws ParseException {
+        return ISO8601Utils.parse(date, new ParsePosition(0));
+    }
+
+    /**
+     * Format a date into 'yyyy-MM-ddThh:mm:ssZ' (default timezone, no milliseconds precision)
+     *
+     * Method is a wrapper around Jackson databind ISO8601Utils.java
+     *
+     * @param date the date to format
+     * @return the date formatted as 'yyyy-MM-ddThh:mm:ssZ'
+     */
+    public static String format(Date date) {
+        return ISO8601Utils.format(date);
+    }
+
+    /**
+     * Format a date into 'yyyy-MM-ddThh:mm:ss[.sss]Z' (GMT timezone)
+     *
+     * Method is a wrapper around Jackson databind ISO8601Utils.java
+     *
+     * @param date the date to format
+     * @param millis true to include millis precision otherwise false
+     * @return the date formatted as 'yyyy-MM-ddThh:mm:ss[.sss]Z'
+     */
+    public static String format(Date date, boolean millis) {
+        return ISO8601Utils.format(date, millis);
+    }
+
+    /**
+     * Format date into yyyy-MM-ddThh:mm:ss[.sss][Z|[+-]hh:mm]
+     *
+     * Method is a wrapper around Jackson databind ISO8601Utils.java
+     *
+     * @param date the date to format
+     * @param millis true to include millis precision otherwise false
+     * @param tz timezone to use for the formatting (UTC will produce 'Z')
+     * @return the date formatted as yyyy-MM-ddThh:mm:ss[.sss][Z|[+-]hh:mm]
+     */
+    public static String format(Date date, boolean millis, TimeZone tz) {
+        return ISO8601Utils.format(date, millis, tz);
     }
 
 }
