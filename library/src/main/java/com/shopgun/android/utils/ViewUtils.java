@@ -16,6 +16,10 @@
 
 package com.shopgun.android.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.KeyEvent;
 import android.view.View;
@@ -72,6 +76,55 @@ public class ViewUtils {
                 return result;
             }
         }
+    }
+
+    /**
+     * Convert any view into a Bitmap
+     *
+     * @param view A View to convert
+     * @param defBackgroundColor A default color to apply to the background, in a background doesn't exist
+     * @return A bitmap
+     */
+    public static Bitmap viewToBitmap(View view, int defBackgroundColor) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Drawable drawable = view.getBackground();
+        if (drawable != null) {
+            drawable.draw(canvas);
+        } else {
+            canvas.drawColor(defBackgroundColor);
+        }
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    /**
+     * Convert a drawable into a Bitmap
+     *
+     * @param drawable A drawable to convert
+     * @return A bitmap
+     */
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        Bitmap bitmap;
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            // Single color bitmap will be created of 1x1 pixel - drawable is just a solid color
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
 }
