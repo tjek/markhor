@@ -31,9 +31,9 @@ public class LogUtil {
      * @param element argument to easily evaluate it
      */
     public static void printMethod(Logger logger, int element) {
-        StackTraceElement ste = Thread.currentThread().getStackTrace()[element];
-        String tag = getTagFromElement(ste);
-        String msg = ste.getMethodName() + "(" + ste.getFileName() + ":" + ste.getLineNumber() + ")";
+        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+        String tag = getTagFromTrace(trace, element);
+        String msg = getMethodFromTrace(trace, element);
         logger.d(tag, msg);
     }
 
@@ -115,13 +115,55 @@ public class LogUtil {
     }
 
     /**
-     * Returns a tag for use in a {@link Logger}, in the format of a class name.
+     * Returns the method name including source file, and line number of the calling method.
+     * E.g.: <p>methodName(ClassName.java:58)</p>
+     * @param trace A StackTrace to get info from
+     * @return A method name
+     */
+    public static String getMethodFromTrace(StackTraceElement[] trace) {
+        return getMethodFromTrace(trace, CALLING_ELEMENT);
+    }
+
+    /**
+     * Returns the method name including source file, and line number.
+     * E.g.: <p>methodName(ClassName.java:58)</p>
+     * @param trace A StackTrace to get info from
+     * @param element A {@code StackTraceElement} to get the method info from
+     * @return A method description
+     */
+    public static String getMethodFromTrace(StackTraceElement[] trace, int element) {
+        StackTraceElement ste = trace[element];
+        return getMethodFromElement(ste);
+    }
+
+    /**
+     * Returns the method name including source file, and line number.
+     * E.g.: <p>methodName(ClassName.java:58)</p>
+     * @param element A {@code StackTraceElement} to get the method info from
+     * @return A method description
+     */
+    public static String getMethodFromElement(StackTraceElement element) {
+        return element.getMethodName() + "(" + element.getFileName() + ":" + element.getLineNumber() + ")";
+    }
+
+    /**
+     * Returns a tag for use in a {@link Logger}, in the format of a class name of the calling class.
      * E.g.: <p>MyClass</p>
      * @param trace A stack trace to get the info from
      * @return A tag
      */
     private static String getTagFromTrace(StackTraceElement[] trace) {
-        return getTagFromElement(trace[CALLING_ELEMENT]);
+        return getTagFromTrace(trace, CALLING_ELEMENT);
+    }
+
+    /**
+     * Returns a tag for use in a {@link Logger}, in the format of a class name.
+     * E.g.: <p>MyClass</p>
+     * @param trace A stack trace to get the info from
+     * @return A tag
+     */
+    public static String getTagFromTrace(StackTraceElement[] trace, int element) {
+        return getTagFromElement(trace[element]);
     }
 
     /**
