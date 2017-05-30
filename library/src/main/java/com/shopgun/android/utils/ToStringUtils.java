@@ -4,6 +4,7 @@ import android.content.ComponentCallbacks2;
 import android.content.res.Configuration;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.View.MeasureSpec;
 
 public class ToStringUtils {
@@ -38,6 +39,19 @@ public class ToStringUtils {
             case MeasureSpec.EXACTLY: return "EXACTLY";
             case MeasureSpec.AT_MOST: return "AT_MOST";
             default: return "UNSPECIFIED";
+        }
+    }
+
+    public static String visibility(View view) {
+        return visibility(view.getVisibility());
+    }
+
+    public static String visibility(int visibility) {
+        switch (visibility) {
+            case View.VISIBLE: return "VISIBLE";
+            case View.INVISIBLE: return "INVISIBLE";
+            case View.GONE: return "GONE";
+            default: return "UNKNOWN";
         }
     }
 
