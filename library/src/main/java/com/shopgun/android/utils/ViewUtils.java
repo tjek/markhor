@@ -16,13 +16,18 @@
 
 package com.shopgun.android.utils;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.view.inputmethod.EditorInfo;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -32,6 +37,8 @@ public class ViewUtils {
     public static final String TAG = Tag.from(ViewUtils.class);
 
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
+
+    private static final int DEF_FADE_DURATION = 150;
 
     private ViewUtils() {
         // private constructor
@@ -149,6 +156,137 @@ public class ViewUtils {
      */
     public static boolean isInvisible(View view) {
         return view.getVisibility() == View.INVISIBLE;
+    }
+
+    /**
+     * Cross fade between two views
+     * @param in The view to fade in
+     * @param out The view to fade out
+     * @return An {@link AnimationSet} of the animations that are being performed
+     */
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
+    public static AnimationSet crossFadeViews(final View in, final View out) {
+        return crossFadeViews(in, out, DEF_FADE_DURATION);
+    }
+
+    /**
+     * Cross fade between two views
+     * @param in The view to fade in
+     * @param out The view to fade out
+     * @param duration The duration of the animation
+     * @return An {@link AnimationSet} of the animations that are being performed
+     */
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
+    public static AnimationSet crossFadeViews(final View in, final View out, int duration) {
+        ViewPropertyAnimator inAnimator = fadeIn(in, duration);
+        ViewPropertyAnimator outAnimator = fadeOut(out, duration);
+        return new AnimationSet(inAnimator, outAnimator);
+    }
+
+    /**
+     * Fade a view in from {@code alpha = 0} to {@code alpha = 1}, hence the visibility if the
+     * {@link View} will be set to {@link View#VISIBLE}.
+     * @param in The view to fade in
+     * @return The {@link ViewPropertyAnimator} for the given animation
+     */
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
+    public static ViewPropertyAnimator fadeIn(final View in) {
+        return fadeIn(in, DEF_FADE_DURATION);
+    }
+
+    /**
+     * Fade a view in from {@code alpha = 0} to {@code alpha = 1}, hence the visibility if the
+     * {@link View} will be set to {@link View#VISIBLE}.
+     * @param in The view to fade in
+     * @param duration The duration of the animation
+     * @return The {@link ViewPropertyAnimator} for the given animation
+     */
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
+    public static ViewPropertyAnimator fadeIn(final View in, int duration) {
+
+        // Set the content view to 0% opacity but visible, so that it is visible
+        // (but fully transparent) during the animation.
+        in.setAlpha(0f);
+        in.setVisibility(View.VISIBLE);
+
+        // Animate the content view to 100% opacity, and clear any animation
+        // listener set on the view.
+        ViewPropertyAnimator animator = in.animate();
+        animator.alpha(1f)
+                .setDuration(duration)
+                .setListener(null);
+        return animator;
+    }
+
+    /**
+     * Fade a view out from {@code alpha = 1} to {@code alpha = 0}. Once the animation finished
+     * the visibility of the view is set to {@link View#GONE} and alpha {@code alpha = 1}.
+     * @param out The view to fade out
+     * @return The {@link ViewPropertyAnimator} for the given animation
+     */
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
+    public static ViewPropertyAnimator fadeOut(final View out) {
+        return fadeOut(out, DEF_FADE_DURATION);
+    }
+
+    /**
+     * Fade a view out from {@code alpha = 1} to {@code alpha = 0}. Once the animation finished
+     * the visibility of the view is set to {@link View#GONE} and alpha {@code alpha = 1}.
+     * @param out The view to fade out
+     * @param duration The duration of the animation
+     * @return The {@link ViewPropertyAnimator} for the given animation
+     */
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
+    public static ViewPropertyAnimator fadeOut(final View out, int duration) {
+
+        // Animate the loading view to 0% opacity. After the animation ends,
+        // set its visibility to GONE as an optimization step (it won't
+        // participate in layout passes, etc.)
+        ViewPropertyAnimator animator = out.animate();
+        animator.alpha(0f)
+                .setDuration(duration)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        out.setVisibility(View.GONE);
+                        out.setAlpha(1f);
+                    }
+                });
+        return animator;
+    }
+
+    public static class AnimationSet {
+
+        private ViewPropertyAnimator mInAnimator;
+        private ViewPropertyAnimator mOutAnimator;
+
+        public AnimationSet() {
+        }
+
+        public AnimationSet(ViewPropertyAnimator inAnimator, ViewPropertyAnimator outAnimator) {
+            this.mInAnimator = inAnimator;
+            this.mOutAnimator = outAnimator;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        public void cancel() {
+            cancel(mInAnimator);
+            cancel(mOutAnimator);
+        }
+
+        public ViewPropertyAnimator getInAnimator() {
+            return mInAnimator;
+        }
+
+        public ViewPropertyAnimator getOutAnimator() {
+            return mOutAnimator;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        private static void cancel(ViewPropertyAnimator animator) {
+            if (animator != null) animator.cancel();
+        }
+
     }
 
 }
