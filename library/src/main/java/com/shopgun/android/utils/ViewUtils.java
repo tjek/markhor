@@ -127,4 +127,28 @@ public class ViewUtils {
         return bitmap;
     }
 
+    /**
+     * @param view A view
+     * @return {@code true} if the view is {@link View#VISIBLE}, else {@code false}
+     */
+    public static boolean isVisible(View view) {
+        return view.getVisibility() == View.VISIBLE;
+    }
+
+    /**
+     * @param view A view
+     * @return {@code true} if the view is {@link View#GONE}, else {@code false}
+     */
+    public static boolean isGone(View view) {
+        return view.getVisibility() == View.GONE;
+    }
+
+    /**
+     * @param view A view
+     * @return {@code true} if the view is {@link View#INVISIBLE}, else {@code false}
+     */
+    public static boolean isInvisible(View view) {
+        return view.getVisibility() == View.INVISIBLE;
+    }
+
 }
