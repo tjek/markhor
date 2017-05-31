@@ -44,3 +44,4 @@ infer-out/
 *.iml
 *.iws
 *.ipr
+/.project
