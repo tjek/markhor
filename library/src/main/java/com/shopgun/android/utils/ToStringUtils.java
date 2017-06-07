@@ -3,6 +3,7 @@ package com.shopgun.android.utils;
 import android.content.ComponentCallbacks2;
 import android.content.res.Configuration;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -111,6 +112,18 @@ public class ToStringUtils {
             case ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW: return "TRIM_MEMORY_RUNNING_LOW";
             case ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE: return "TRIM_MEMORY_RUNNING_MODERATE";
             case ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN: return "TRIM_MEMORY_UI_HIDDEN";
+            default: return "UNKNOWN";
+        }
+    }
+
+    public static String logLevelToString(int logLevel) {
+        switch (logLevel) {
+            case Log.VERBOSE: return "VERBOSE";
+            case Log.DEBUG: return "DEBUG";
+            case Log.INFO: return "INFO";
+            case Log.WARN: return "WARN";
+            case Log.ERROR: return "ERROR";
+            case Log.ASSERT: return "ASSERT";
             default: return "UNKNOWN";
         }
     }

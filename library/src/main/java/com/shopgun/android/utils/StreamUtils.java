@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 
 public class StreamUtils {
 
-
     public static byte[] inputStreamToByte(InputStream is, int contentLength) throws IOException {
 
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -45,7 +44,10 @@ public class StreamUtils {
     }
 
     public static String inputStreamToString(InputStream is) throws IOException {
+        return readerToString(is);
+    }
 
+    public static String readerToString(InputStream is) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String line;
@@ -58,6 +60,5 @@ public class StreamUtils {
         }
         return sb.toString();
     }
-
 
 }
