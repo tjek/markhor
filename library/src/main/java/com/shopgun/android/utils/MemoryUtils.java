@@ -20,11 +20,7 @@ public class MemoryUtils {
      */
     public static int getMaxHeap(Context c) {
         ActivityManager am = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            return am.getLargeMemoryClass();
-        } else {
-            return am.getMemoryClass();
-        }
+        return am.getLargeMemoryClass();
     }
 
 }

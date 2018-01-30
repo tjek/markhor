@@ -44,15 +44,7 @@ public class DeviceUtils {
     }
 
     public static String getRadio() {
-        try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                return Build.getRadioVersion();
-            } else {
-                return Build.RADIO;
-            }
-        } catch (Exception e) {
-            return null;
-        }
+        return Build.getRadioVersion();
     }
 
     /**

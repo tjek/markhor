@@ -152,9 +152,6 @@ public class KeyboardUtils {
      */
     public static void setKeyboardVisible(Context context, View view, boolean visible) {
         if (view != null) {
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1 && view.hasFocus()) {
-                view.clearFocus();
-            }
             setKeyboardVisible(context, view.getWindowToken(), visible);
         }
     }

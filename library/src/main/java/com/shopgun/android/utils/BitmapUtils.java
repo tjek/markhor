@@ -55,10 +55,8 @@ public class BitmapUtils {
     public static int sizeOf(Bitmap bitmap) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             return bitmap.getAllocationByteCount();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+        } else { // sdk [15, 18]
             return bitmap.getByteCount();
-        } else {
-            return bitmap.getRowBytes() * bitmap.getHeight();
         }
     }
 

@@ -23,8 +23,8 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 24
+        minSdkVersion 15
+        targetSdkVersion 27
     }
 
     buildTypes {
@@ -37,12 +37,12 @@ android {
 
 dependencies {
     def libs = rootProject.libDependencies
-    compile libs.supportv4
-    compile libs.appcompat
-    compile libs.recyclerview
-    testCompile libs.junit
-    testCompile libs.robolectric
-    testCompile libs.mockito
+    api libs.supportv4
+    api libs.appcompat
+    api libs.recyclerview
+    testImplementation libs.junit
+    testImplementation libs.robolectric
+    testImplementation libs.mockito
 }
 
 apply from: 'bintray.gradle'
