@@ -6,11 +6,11 @@ ext {
     buildToolsVersion = '27.0.3'
 
     libVersions = [
-            support                     : '27.0.2', // support v25.1.0 and upwards breaks hotspot-clicks in PublicationFragment
-            junit                       : '4.12',
+            support                     : '27.0.2',
             espresso                    : '2.2.2',
-            robolectric                 : '3.6.1',
-            mockito                     : '2.13.0'
+            robolectric                 : '3.7',
+            mockito                     : '2.15.0',
+            junit                       : '4.12'
     ]
 
     libDependencies = [
