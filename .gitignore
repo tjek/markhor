@@ -45,3 +45,7 @@ infer-out/
 *.iws
 *.ipr
 /.project
+.idea/caches
+.idea/codeStyles
+.idea/markdown-navigator
+markdown-navigator.xml
