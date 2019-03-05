@@ -16,7 +16,7 @@
 
 package com.shopgun.android.utils;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

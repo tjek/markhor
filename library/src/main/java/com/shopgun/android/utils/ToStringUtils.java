@@ -2,7 +2,7 @@ package com.shopgun.android.utils;
 
 import android.content.ComponentCallbacks2;
 import android.content.res.Configuration;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
