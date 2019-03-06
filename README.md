@@ -17,6 +17,6 @@ allprojects {
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    compile 'com.shopgun.android:utils:1.0.8'
+    compile 'com.shopgun.android:utils:1.1.0' // 2.0.0 for AndroidX
 }
 ```
