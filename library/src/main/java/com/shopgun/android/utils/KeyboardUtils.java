@@ -25,6 +25,8 @@ import android.os.IBinder;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.fragment.app.Fragment;
+
 public class KeyboardUtils {
 
     public static final String TAG = Tag.from(KeyboardUtils.class);
@@ -47,7 +49,7 @@ public class KeyboardUtils {
      * Request to show the soft input window from the context of the window that is currently accepting input.
      * @param fragment The current fragment
      */
-    public static void show(android.support.v4.app.Fragment fragment) {
+    public static void show(Fragment fragment) {
         if (fragment != null) {
             show(fragment.getActivity());
         }
@@ -96,7 +98,7 @@ public class KeyboardUtils {
      * Request to hide the soft input window from the context of the window that is currently accepting input.
      * @param fragment The current fragment
      */
-    public static void hide(android.support.v4.app.Fragment fragment) {
+    public static void hide(Fragment fragment) {
         if (fragment != null) {
             hide(fragment.getActivity());
         }

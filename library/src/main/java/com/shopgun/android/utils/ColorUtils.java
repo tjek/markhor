@@ -17,8 +17,8 @@
 package com.shopgun.android.utils;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 
 import java.util.Locale;
 
@@ -108,7 +108,7 @@ public class ColorUtils {
     @ColorInt
     public static int setAlphaComponent(@ColorInt int color,
                                         @IntRange(from = 0x0, to = 0xFF) int alpha) {
-        return android.support.v4.graphics.ColorUtils.setAlphaComponent(color, alpha);
+        return androidx.core.graphics.ColorUtils.setAlphaComponent(color, alpha);
     }
 
     /**
@@ -120,7 +120,7 @@ public class ColorUtils {
      * @return the luminance of a color
      */
     public static double calculateLuminance(@ColorInt int color) {
-        return android.support.v4.graphics.ColorUtils.calculateLuminance(color);
+        return androidx.core.graphics.ColorUtils.calculateLuminance(color);
     }
 
     /**
@@ -134,7 +134,7 @@ public class ColorUtils {
      * @return the contrast ratio between {@code foreground} and {@code background}.
      */
     public static double calculateContrast(@ColorInt int foreground, @ColorInt int background) {
-        return android.support.v4.graphics.ColorUtils.calculateContrast(foreground, background);
+        return androidx.core.graphics.ColorUtils.calculateContrast(foreground, background);
     }
 
     /**
@@ -148,7 +148,7 @@ public class ColorUtils {
      * @return the alpha value in the range 0-255, or -1 if no value could be calculated.
      */
     public static int calculateMinimumAlpha(@ColorInt int foreground, @ColorInt int background, float minContrastRatio) {
-        return android.support.v4.graphics.ColorUtils.calculateMinimumAlpha(foreground, background, minContrastRatio);
+        return androidx.core.graphics.ColorUtils.calculateMinimumAlpha(foreground, background, minContrastRatio);
     }
 
 }
