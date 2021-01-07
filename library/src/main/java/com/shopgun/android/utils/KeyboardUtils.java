@@ -81,7 +81,7 @@ public class KeyboardUtils {
      * @param view The currently focused view
      */
     public static void show(View view) {
-        setKeyboardVisible(view, false);
+        setKeyboardVisible(view, true);
     }
 
     /**
@@ -130,7 +130,7 @@ public class KeyboardUtils {
      * @param view The currently focused view
      */
     public static void hide(View view) {
-        setKeyboardVisible(view, true);
+        setKeyboardVisible(view, false);
     }
 
     /**
