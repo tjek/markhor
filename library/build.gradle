@@ -52,4 +52,4 @@ dependencies {
     testImplementation libs.mockito
 }
 
-apply from: 'bintray.gradle'
+//apply from: 'bintray.gradle'
