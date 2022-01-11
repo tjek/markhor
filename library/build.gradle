@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
@@ -10,6 +11,12 @@ buildscript {
         // Dependencies checker: run from command line ./gradlew dependencyUpdates -Drevision=release|milestone|integration
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.25.0'
     }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    maven { url "https://jitpack.io" }
 }
 
 android {
@@ -46,4 +53,18 @@ dependencies {
     testImplementation libs.junit
     testImplementation libs.robolectric
     testImplementation libs.mockito
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.shopgun'
+                artifactId = 'markhor'
+                version = '2.0.2'
+            }
+        }
+    }
 }
