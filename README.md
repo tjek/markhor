@@ -1,3 +1,6 @@
+[![](https://jitpack.io/v/shopgun/markhor.svg)](https://jitpack.io/#shopgun/markhor)
+
+
 # markhor
 
 utilities for android projects.
@@ -17,6 +20,6 @@ allprojects {
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    compile 'com.shopgun.android:utils:1.1.0' // 2.0.0 for AndroidX
+    implementation 'com.github.shopgun:markhor:2.0.2'
 }
 ```
